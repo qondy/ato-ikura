@@ -1,0 +1,871 @@
+// 本文の下余白は画面下部の固定ボタンの高さ分確保する
+.app-main {
+  padding-bottom: 160px;
+}
+
+// タップしやすさ：ボタンは高さ36px以上
+.btn {
+  min-height: 36px;
+}
+
+.empty-state {
+  padding: $spacing-lg $spacing-md;
+
+  p {
+    white-space: pre-line;
+  }
+}
+
+.loading {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-align: center;
+  padding: $spacing-xl 0;
+}
+
+// ===== Tabs =====
+.tabs-bar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba($color-bg, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid $color-border;
+}
+
+.tabs {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  gap: $spacing-xs;
+
+  &__btn {
+    flex: 1 1 0;
+    min-height: 40px;
+    padding: 9px 4px;
+    border-radius: 999px;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    color: $color-text-muted;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-primary-ink;
+    }
+
+    &.is-active {
+      background: $color-primary;
+      color: #fff;
+    }
+  }
+}
+
+.section {
+  &__title--lg {
+    font-size: $font-size-xl;
+  }
+
+  &__count {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    font-weight: 600;
+  }
+}
+
+.section__head--row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  .btn {
+    flex-shrink: 0;
+  }
+}
+
+// ===== はじめての設定 =====
+.setup-card {
+  @extend .card-surface;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 800;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: 1.7;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// ===== 今月あといくら =====
+.remain-card {
+  background: $color-primary;
+  color: #fff;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  box-shadow: 0 8px 24px rgba($color-primary, 0.3);
+  transition: background 0.2s ease;
+
+  &.is-caution {
+    background: #d35400;
+    box-shadow: 0 8px 24px rgba(#d35400, 0.3);
+  }
+
+  &.is-over {
+    background: #c0392b;
+    box-shadow: 0 8px 24px rgba(#c0392b, 0.3);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+  }
+
+  &__period {
+    font-size: $font-size-sm;
+    font-weight: 700;
+    opacity: 0.95;
+  }
+
+  &__settings {
+    min-height: 36px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: $font-size-xs;
+    font-weight: 700;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &__label {
+    margin-top: $spacing-md;
+    font-size: $font-size-base;
+    font-weight: 700;
+  }
+
+  &__amount {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+
+    @media (min-width: $bp-mobile) {
+      font-size: 52px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: 700;
+  }
+
+  &__perday {
+    font-size: $font-size-base;
+  }
+
+  &__pace {
+    margin-top: $spacing-sm;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+  }
+
+  &__breakdown {
+    margin: $spacing-md 0 0;
+    padding-top: $spacing-md;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: $spacing-sm;
+
+    div {
+      min-width: 0;
+    }
+
+    dt {
+      font-size: $font-size-xs;
+      opacity: 0.95;
+    }
+
+    dd {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: 800;
+    }
+  }
+}
+
+.meter {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  margin: $spacing-sm 0 $spacing-sm;
+
+  &__bar {
+    height: 100%;
+    background: #fff;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+}
+
+// ===== 記録フォーム =====
+.quick-form {
+  @extend .card-surface;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-sm;
+
+    @media (max-width: 380px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  input[type='text'],
+  input[type='date'] {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background: $color-surface;
+    font-size: $font-size-base;
+    color: $color-text;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+.amount-field {
+  display: flex;
+  align-items: baseline;
+  gap: $spacing-sm;
+  border-bottom: 2px solid $color-primary;
+  padding: 0 $spacing-xs;
+
+  input[type='text'] {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    border: none !important;
+    background: transparent !important;
+    padding: 4px 0 !important;
+    font-size: 36px !important;
+    font-weight: 800;
+    color: $color-text;
+    text-align: right;
+    outline: none;
+  }
+
+  &__unit {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-text-muted;
+  }
+
+  &--sm input[type='text'] {
+    font-size: 24px !important;
+  }
+
+  &:focus-within {
+    border-color: $color-primary-ink;
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  &--quick {
+    margin-top: $spacing-sm;
+  }
+}
+
+.chip {
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $color-text;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &.is-active {
+    background: $color-primary-ink;
+    border-color: $color-primary-ink;
+    color: #fff;
+  }
+}
+
+// ===== 支出の一覧 =====
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.expense-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  min-height: 52px;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  text-align: left;
+  color: $color-text;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &__date {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    color: $color-text-muted;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__cat {
+    font-size: $font-size-sm;
+    font-weight: 700;
+  }
+
+  &__memo {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__amount {
+    font-size: $font-size-base;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+}
+
+// ===== へそくり貯金箱 =====
+.piggy-card {
+  @extend .card-surface;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 700;
+    color: $color-text-muted;
+  }
+
+  &__amount {
+    font-size: $font-size-xl;
+    font-weight: 800;
+    color: $color-primary-ink;
+  }
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: $radius-md;
+  background: $color-surface-2;
+  margin-bottom: $spacing-md;
+
+  &__btn {
+    min-height: 40px;
+    padding: 6px 8px;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    color: $color-text-muted;
+
+    &.is-active {
+      background: $color-surface;
+      color: $color-primary-ink;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// ===== きろく =====
+.period-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+
+  .btn {
+    min-width: 44px;
+  }
+
+  &__center {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 800;
+  }
+
+  &__range {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xl;
+}
+
+.summary-cell {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-md $spacing-xs;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba($color-primary, 0.08);
+  min-width: 0;
+
+  &__value {
+    font-size: $font-size-base;
+    font-weight: 800;
+    color: $color-primary-ink;
+    overflow-wrap: anywhere;
+
+    @media (min-width: $bp-mobile) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-weight: 600;
+  }
+
+  &.is-over &__value {
+    color: $color-danger;
+  }
+}
+
+.cat-bars {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.cat-bar {
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    margin-bottom: 4px;
+  }
+
+  &__label {
+    font-weight: 700;
+  }
+
+  &__value {
+    color: $color-text-muted;
+    white-space: nowrap;
+  }
+
+  &__track {
+    height: 10px;
+    border-radius: 999px;
+    background: $color-surface-2;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: 999px;
+    background: $color-primary;
+  }
+}
+
+// ===== ランキング =====
+.rank-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.rank-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+
+  &__no {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-surface-2;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    font-weight: 800;
+
+    &.is-top {
+      background: $color-primary;
+      color: #fff;
+    }
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: $spacing-sm;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 700;
+  }
+
+  &__value {
+    font-size: $font-size-base;
+    font-weight: 800;
+    color: $color-primary-ink;
+    white-space: nowrap;
+  }
+
+  &__sub {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+}
+
+.source-note {
+  margin-top: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  line-height: 1.6;
+}
+
+.compare-list {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  overflow: hidden;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'label mine' 'label diff';
+  align-items: center;
+  gap: 0 $spacing-sm;
+  padding: 10px $spacing-md;
+  border-top: 1px solid $color-border;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &__label {
+    grid-area: label;
+    font-size: $font-size-sm;
+    font-weight: 700;
+  }
+
+  &__mine {
+    grid-area: mine;
+    text-align: right;
+    font-size: $font-size-base;
+    font-weight: 800;
+  }
+
+  &__diff {
+    grid-area: diff;
+    text-align: right;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+
+    &.is-more {
+      color: #b5462f;
+      font-weight: 700;
+    }
+  }
+}
+
+.avg-box {
+  @extend .card-surface;
+
+  &__line {
+    font-size: $font-size-sm;
+    line-height: 1.8;
+  }
+}
+
+// ===== ふりかえり =====
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xl;
+}
+
+.stat-card {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-md $spacing-xs;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba($color-primary, 0.1);
+  min-width: 0;
+
+  &__value {
+    font-size: $font-size-lg;
+    font-weight: 800;
+    color: $color-primary-ink;
+    overflow-wrap: anywhere;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-weight: 600;
+  }
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.history-card {
+  width: 100%;
+  text-align: left;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-left: 5px solid $color-primary;
+  color: $color-text;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &.is-over {
+    border-left-color: #c0392b;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: $spacing-xs $spacing-sm;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: 800;
+  }
+
+  &__status {
+    font-size: $font-size-sm;
+    font-weight: 800;
+    color: $color-primary-ink;
+
+    &.is-over {
+      color: $color-danger;
+    }
+  }
+
+  &__meta,
+  &__top {
+    margin-top: 4px;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: 1.6;
+  }
+}
+
+// ===== Modals =====
+.modal {
+  .field {
+    margin-bottom: $spacing-md;
+  }
+
+  input[type='date'],
+  select {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px $spacing-md;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background: $color-surface;
+    font-size: $font-size-base;
+    color: $color-text;
+  }
+
+  &__lead {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+  }
+
+  &__actions-left {
+    margin-right: auto;
+  }
+
+  &__actions .btn {
+    white-space: nowrap;
+  }
+}
+
+.field__note {
+  margin-top: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  min-height: 36px;
+  font-size: $font-size-sm;
+  cursor: pointer;
+
+  input {
+    width: 20px;
+    height: 20px;
+    accent-color: $color-primary-ink;
+  }
+}
+
+// ===== 画面下部の固定ボタン =====
+.about-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(20, 20, 26, 0.72);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+// 追加ボタンは「ご意見」の真上に積む
+.fab {
+  position: fixed;
+  bottom: 88px;
+  right: 24px;
+  z-index: 1000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: $color-primary;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba($color-primary, 0.45);
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+}
+
+// トーストは固定ボタンより上に出す
+.toast {
+  bottom: 156px;
+}
+
+// タップ対象を36px以上に
+.app-header__about-link,
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.modal__close {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
